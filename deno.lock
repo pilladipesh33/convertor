@@ -7,10 +7,12 @@
     "npm:@types/react@19": "19.0.1",
     "npm:eslint-config-next@15.1.0": "15.1.0_eslint@9.17.0_typescript@5.7.2_@typescript-eslint+parser@8.18.0__eslint@9.17.0__typescript@5.7.2_eslint-plugin-import@2.31.0__eslint@9.17.0",
     "npm:eslint@9": "9.17.0",
+    "npm:lucide-react@0.468": "0.468.0_react@19.0.0",
     "npm:next@15.1.0": "15.1.0_react@19.0.0_react-dom@19.0.0__react@19.0.0",
     "npm:postcss@8": "8.4.49",
     "npm:react-dom@19": "19.0.0_react@19.0.0",
     "npm:react@19": "19.0.0",
+    "npm:sonner@^1.7.1": "1.7.1_react@19.0.0_react-dom@19.0.0__react@19.0.0",
     "npm:tailwindcss@^3.4.1": "3.4.16_postcss@8.4.49",
     "npm:typescript@5": "5.7.2"
   },
@@ -1560,6 +1562,12 @@
     "lru-cache@10.4.3": {
       "integrity": "sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ=="
     },
+    "lucide-react@0.468.0_react@19.0.0": {
+      "integrity": "sha512-6koYRhnM2N0GGZIdXzSeiNwguv1gt/FAjZOiPl76roBi3xKEXa4WmfpxgQwTTL4KipXjefrnf3oV4IsYhi4JFA==",
+      "dependencies": [
+        "react"
+      ]
+    },
     "math-intrinsics@1.0.0": {
       "integrity": "sha512-4MqMiKP90ybymYvsut0CH2g4XWbfLtmlCkXmtmdcDCxNB+mQcu1w/1+L/VD7vi/PSv7X2JYV7SCcR+jiPXnQtA=="
     },
@@ -2031,6 +2039,13 @@
         "is-arrayish"
       ]
     },
+    "sonner@1.7.1_react@19.0.0_react-dom@19.0.0__react@19.0.0": {
+      "integrity": "sha512-b6LHBfH32SoVasRFECrdY8p8s7hXPDn3OHUFbZZbiB1ctLS9Gdh6rpX2dVrpQA0kiL5jcRzDDldwwLkSKk3+QQ==",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ]
+    },
     "source-map-js@1.2.1": {
       "integrity": "sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA=="
     },
@@ -2391,10 +2406,12 @@
         "npm:@types/react@19",
         "npm:eslint-config-next@15.1.0",
         "npm:eslint@9",
+        "npm:lucide-react@0.468",
         "npm:next@15.1.0",
         "npm:postcss@8",
         "npm:react-dom@19",
         "npm:react@19",
+        "npm:sonner@^1.7.1",
         "npm:tailwindcss@^3.4.1",
         "npm:typescript@5"
       ]
