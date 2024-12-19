@@ -1,3 +1,16 @@
 {
-  "unstable": ["unsafe-proto"]
+	"unstable": ["unsafe-proto"],
+	"compilerOptions": {
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"allowSyntheticDefaultImports": true,
+		"allowJs": true,
+		"jsx": "react-jsx",
+		"jsxImportSource": "react",
+		"types": ["next", "next/types/global"]
+	},
+	"tasks": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start"
+	}
 }
