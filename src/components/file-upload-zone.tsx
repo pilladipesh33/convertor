@@ -1,5 +1,6 @@
 import React from "react";
 import { Upload } from "lucide-react";
+import { ACCEPTED_FORMAT } from "@/utils/constant";
 
 type FileUploadZoneProps = {
   isDragging: boolean;
@@ -36,7 +37,7 @@ export const FileUploadZone: React.FC<FileUploadZoneProps> = ({
         <input
           type="file"
           className="hidden"
-          accept="image/*,video/*"
+          accept={ACCEPTED_FORMAT}
           multiple
           onChange={onFileSelect}
         />

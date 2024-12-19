@@ -10,23 +10,8 @@ import { ErrorMessage } from "./error-message";
 
 export const FileUpload: React.FC = () => {
 	const [files, setFiles] = useState<FileInfo[]>([]);
-	const [isDragging, setIsDragging] = useState(false);
+	const [isDragging, setIsDragging] = useState<boolean>(false);
 	const [error, setError] = useState<string | null>(null);
-
-	const simulateUpload = (fileInfo: FileInfo) => {
-		let progress = 0;
-		const interval = setInterval(() => {
-			progress += 10;
-			setFiles((prevFiles) =>
-				prevFiles.map((f) => (f.id === fileInfo.id ? { ...f, progress } : f))
-			);
-
-			if (progress === 100) {
-				clearInterval(interval);
-				toast.success(`${fileInfo.name} uploaded successfully!`);
-			}
-		}, 500);
-	};
 
 	const handleFiles = useCallback((fileList: FileList) => {
 		const newFiles: FileInfo[] = [];
@@ -43,9 +28,8 @@ export const FileUpload: React.FC = () => {
 			const fileInfo: FileInfo = {
 				id: crypto.randomUUID(),
 				name: file.name,
-				// type: fileType,
+				type: fileType,
 				size: formatFileSize(file.size),
-				progress: 0,
 			};
 
 			newFiles.push(fileInfo);
@@ -54,9 +38,6 @@ export const FileUpload: React.FC = () => {
 		if (!hasError) {
 			setError(null);
 			setFiles((prev) => [...prev, ...newFiles]);
-			newFiles.forEach((file) => {
-				simulateUpload(file);
-			});
 		}
 	}, []);
 
@@ -97,7 +78,7 @@ export const FileUpload: React.FC = () => {
 
 	return (
 		<div className="max-w-2xl my-auto mx-auto p-6">
-			<Toaster position="bottom-right" />
+			<Toaster position="top-right" />
 			<FileUploadZone
 				isDragging={isDragging}
 				onDrop={handleDrop}

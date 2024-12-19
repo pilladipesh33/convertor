@@ -1,15 +1,8 @@
+"use client";
+
 import React from "react";
 import { Image as ImageIcon, Video, X } from "lucide-react";
 import { FileInfo } from "../types/file";
-import { IMAGE_FORMAT } from "@/utils/format-constant";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 type FileListProps = {
 	files: FileInfo[];
@@ -26,7 +19,7 @@ export const FileList: React.FC<FileListProps> = ({ files, onRemove }) => {
 				{files.map((file) => (
 					<div
 						key={file.id}
-						className="flex items-center justify-between p-4 bg-white rounded-lg gap-x-5"
+						className="flex items-center justify-between p-4 bg-white rounded-lg border"
 					>
 						<div className="flex items-center space-x-3 flex-1">
 							{file.type === "image" ? (
@@ -39,28 +32,8 @@ export const FileList: React.FC<FileListProps> = ({ files, onRemove }) => {
 								<p className="text-sm text-gray-500">
 									{file.type} • {file.size}
 								</p>
-								{file.progress < 100 && (
-									<div className="w-full mt-2 bg-gray-200 rounded-full h-1.5">
-										<div
-											className="bg-blue-500 h-1.5 rounded-full transition-all duration-300"
-											style={{ width: `${file.progress}%` }}
-										/>
-									</div>
-								)}
 							</div>
 						</div>
-						<DropdownMenu>
-							<DropdownMenuTrigger>
-								<span>Open</span>
-							</DropdownMenuTrigger>
-							<DropdownMenuContent>
-								{IMAGE_FORMAT.map((format) => (
-									<>
-										<DropdownMenuItem>{format}</DropdownMenuItem>
-									</>
-								))}
-							</DropdownMenuContent>
-						</DropdownMenu>
 						<button
 							onClick={() => onRemove(file.id)}
 							className="p-1 hover:bg-gray-100 rounded ml-2"

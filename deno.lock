@@ -2,11 +2,13 @@
   "version": "4",
   "specifiers": {
     "npm:@eslint/eslintrc@3": "3.2.0",
+    "npm:@ffmpeg/ffmpeg@~0.12.10": "0.12.10",
+    "npm:@ffmpeg/util@~0.12.1": "0.12.1",
     "npm:@types/node@20": "20.17.10",
     "npm:@types/react-dom@19": "19.0.2_@types+react@19.0.1",
     "npm:@types/react@19": "19.0.1",
     "npm:eslint-config-next@15.1.0": "15.1.0_eslint@9.17.0_typescript@5.7.2_@typescript-eslint+parser@8.18.0__eslint@9.17.0__typescript@5.7.2_eslint-plugin-import@2.31.0__eslint@9.17.0",
-    "npm:eslint@9": "9.17.0",
+    "npm:eslint@^9.17.0": "9.17.0",
     "npm:lucide-react@0.468": "0.468.0_react@19.0.0",
     "npm:next@15.1.0": "15.1.0_react@19.0.0_react-dom@19.0.0__react@19.0.0",
     "npm:postcss@8": "8.4.49",
@@ -271,6 +273,18 @@
       "dependencies": [
         "levn"
       ]
+    },
+    "@ffmpeg/ffmpeg@0.12.10": {
+      "integrity": "sha512-lVtk8PW8e+NUzGZhPTWj2P1J4/NyuCrbDD3O9IGpSeLYtUZKBqZO8CNj1WYGghep/MXoM8e1qVY1GztTkf8YYQ==",
+      "dependencies": [
+        "@ffmpeg/types"
+      ]
+    },
+    "@ffmpeg/types@0.12.2": {
+      "integrity": "sha512-NJtxwPoLb60/z1Klv0ueshguWQ/7mNm106qdHkB4HL49LXszjhjCCiL+ldHJGQ9ai2Igx0s4F24ghigy//ERdA=="
+    },
+    "@ffmpeg/util@0.12.1": {
+      "integrity": "sha512-10jjfAKWaDyb8+nAkijcsi9wgz/y26LOc1NKJradNMyCIl6usQcBbhkjX5qhALrSBcOy6TOeksunTYa+a03qNQ=="
     },
     "@humanfs/core@0.19.1": {
       "integrity": "sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA=="
@@ -3059,11 +3073,13 @@
     "packageJson": {
       "dependencies": [
         "npm:@eslint/eslintrc@3",
+        "npm:@ffmpeg/ffmpeg@~0.12.10",
+        "npm:@ffmpeg/util@~0.12.1",
         "npm:@types/node@20",
         "npm:@types/react-dom@19",
         "npm:@types/react@19",
         "npm:eslint-config-next@15.1.0",
-        "npm:eslint@9",
+        "npm:eslint@^9.17.0",
         "npm:lucide-react@0.468",
         "npm:next@15.1.0",
         "npm:postcss@8",
