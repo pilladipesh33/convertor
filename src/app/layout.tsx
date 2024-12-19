@@ -1,15 +1,23 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Playwrite_AR, Space_Grotesk, Tiny5 } from "next/font/google";
 import "./globals.css";
+import { NavBottomBar } from "@/components/nav-bottomBar";
+import { Header } from "@/components/header";
 
-const geistSans = Geist({
-	variable: "--font-geist-sans",
-	subsets: ["latin"],
+const CursiveHeading = Playwrite_AR({
+	weight: "400", // Added a valid property
+	variable: "--font-cursive-heading",
 });
 
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
+const tiny5 = Tiny5({
 	subsets: ["latin"],
+	weight: "400", // Added a valid property
+	variable: "--font-tiny5",
+});
+
+const spaceGrotesk = Space_Grotesk({
+	subsets: ["latin"],
+	variable: "--font-space-grotesk",
 });
 
 export const metadata: Metadata = {
@@ -25,9 +33,17 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				className={`${CursiveHeading.variable} ${tiny5.variable} ${spaceGrotesk.variable} antialiased`}
 			>
-				{children}
+				<div className="p-5 min-h-dvh flex flex-col justify-center items-center">
+					<div className="sticky top-5">
+						<Header />
+					</div>
+					<div className="flex-grow">{children}</div>
+					<div className="sticky bottom-5">
+						<NavBottomBar />
+					</div>
+				</div>
 			</body>
 		</html>
 	);
