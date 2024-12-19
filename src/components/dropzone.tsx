@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { FFmpeg } from "@ffmpeg/ffmpeg";
+
 import ReactDropzone from "react-dropzone";
 import {
   UploadCloud,
@@ -22,62 +24,28 @@ import {
 import { Button } from "./ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useToast } from "@/hooks/use-toast";
+
 import { formatFileSize } from "@/utils/file";
 import fileToIcon from "@/utils/file-to-icon";
 import compressFileName from "@/utils/compress-filenames";
 import convertFile from "@/utils/media-convert";
 import loadFfmpeg from "@/utils/load-ffmpeg";
+import { ACCEPTED_FORMAT, EXTENSIONS } from "@/utils/constant";
 
 import { Actions } from "@/types/action";
-import { useToast } from "@/hooks/use-toast";
-
-const extensions = {
-  image: [
-    "jpg",
-    "jpeg",
-    "png",
-    "gif",
-    "bmp",
-    "webp",
-    "ico",
-    "tif",
-    "tiff",
-    "svg",
-    "raw",
-    "tga",
-  ],
-  video: [
-    "mp4",
-    "m4v",
-    "mp4v",
-    "3gp",
-    "3g2",
-    "avi",
-    "mov",
-    "wmv",
-    "mkv",
-    "flv",
-    "ogv",
-    "webm",
-    "h264",
-    "264",
-    "hevc",
-    "265",
-  ],
-  audio: ["mp3", "wav", "ogg", "aac", "wma", "flac", "m4a"],
-};
+import { FilesType } from "@/types/file";
 
 export default function MediaZone() {
   const { toast } = useToast();
   const [isHover, setIsHover] = useState(false);
   const [actions, setActions] = useState<Actions[]>([]);
   const [isReady, setIsReady] = useState(false);
-  const [files, setFiles] = useState<Array<any>>([]);
+  const [files, setFiles] = useState<Array<FilesType>>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isConverting, setIsConverting] = useState(false);
   const [isDone, setIsDone] = useState(false);
-  const ffmpegRef = useRef<any>(null);
-  // const [selected, setSelected] = useState("...");
+  const ffmpegRef = useRef<FFmpeg | null>(null);
 
   const reset = () => {
     setIsDone(false);
@@ -85,24 +53,6 @@ export default function MediaZone() {
     setFiles([]);
     setIsReady(false);
     setIsConverting(false);
-  };
-
-  const acceptedFiles = {
-    "image/*": [
-      ".jpg",
-      ".jpeg",
-      ".png",
-      ".gif",
-      ".bmp",
-      ".webp",
-      ".ico",
-      ".tif",
-      ".tiff",
-      ".raw",
-      ".tga",
-    ],
-    "audio/*": [],
-    "video/*": [],
   };
 
   useEffect(() => {
@@ -114,17 +64,11 @@ export default function MediaZone() {
     loadFFmpeg();
   }, []);
 
-  console.log("action", actions);
+  useEffect(() => {
+    checkIsReady();
+  });
 
-  // useEffect(() => {
-  //   if (actions.length === 0) {
-  //     reset();
-  //   } else {
-  //     checkIsReady();
-  //   }
-  // }, []);
-  //
-  const handleUpload = (data: Array<any>) => {
+  const handleUpload = (data: FilesType[]) => {
     resetHoverState();
     setFiles(data);
     const newActions = data.map((file) => ({
@@ -160,6 +104,7 @@ export default function MediaZone() {
           ),
         );
       } catch (err: unknown) {
+        console.log(err);
         setActions((prevActions) =>
           prevActions.map((a) =>
             a === action
@@ -213,19 +158,6 @@ export default function MediaZone() {
       prevFiles.filter((f) => f.name !== action.file_name),
     );
   }, []);
-
-  // const deleteAction = (action: Actions) => {
-  //   setActions(actions.filter((a) => a !== action));
-  //   setFiles(files.filter((f) => f.name !== action.file_name));
-  // };
-  //
-  // const updateAction = (fileName: string, to: string) => {
-  //   setActions(
-  //     actions.map((action) =>
-  //       action.file_name === fileName ? { ...action, to } : action,
-  //     ),
-  //   );
-  // };
 
   const checkIsReady = () => {
     const allReady = actions.every((action) => action.to);
@@ -298,7 +230,7 @@ export default function MediaZone() {
                   <SelectContent className="h-fit">
                     {action.file_type.includes("image") && (
                       <div className="grid grid-cols-2 gap-2 w-fit">
-                        {extensions.image.map((ext, i) => (
+                        {EXTENSIONS.image.map((ext, i) => (
                           <div key={i} className="col-span-1 text-center">
                             <SelectItem value={ext} className="mx-auto">
                               {ext}
@@ -319,7 +251,7 @@ export default function MediaZone() {
                         </TabsList>
                         <TabsContent value="video">
                           <div className="grid grid-cols-3 gap-2 w-fit">
-                            {extensions.video.map((ext, i) => (
+                            {EXTENSIONS.video.map((ext, i) => (
                               <div key={i} className="col-span-1 text-center">
                                 <SelectItem value={ext} className="mx-auto">
                                   {ext}
@@ -330,7 +262,7 @@ export default function MediaZone() {
                         </TabsContent>
                         <TabsContent value="audio">
                           <div className="grid grid-cols-3 gap-2 w-fit">
-                            {extensions.audio.map((ext, i) => (
+                            {EXTENSIONS.audio.map((ext, i) => (
                               <div key={i} className="col-span-1 text-center">
                                 <SelectItem value={ext} className="mx-auto">
                                   {ext}
@@ -343,7 +275,7 @@ export default function MediaZone() {
                     )}
                     {action.file_type.includes("audio") && (
                       <div className="grid grid-cols-2 gap-2 w-fit">
-                        {extensions.audio.map((ext, i) => (
+                        {EXTENSIONS.audio.map((ext, i) => (
                           <div key={i} className="col-span-1 text-center">
                             <SelectItem value={ext} className="mx-auto">
                               {ext}
@@ -404,12 +336,14 @@ export default function MediaZone() {
     );
   }
 
+  console.log(files);
+
   return (
     <ReactDropzone
       onDrop={handleUpload}
       onDragEnter={handleHover}
       onDragLeave={resetHoverState}
-      accept={acceptedFiles}
+      accept={ACCEPTED_FORMAT}
       onDropRejected={() => {
         resetHoverState();
         toast({
