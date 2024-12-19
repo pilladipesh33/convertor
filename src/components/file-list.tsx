@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 import { Image as ImageIcon, Video, X } from "lucide-react";
 import { FileInfo } from "../types/file";
@@ -9,7 +11,7 @@ type FileListProps = {
 
 export const FileList: React.FC<FileListProps> = ({ files, onRemove }) => {
   if (files.length === 0) return null;
-
+  
   return (
     <div className="mt-6">
       <h3 className="text-lg font-medium text-gray-900 mb-4">Uploaded Files</h3>
@@ -30,14 +32,6 @@ export const FileList: React.FC<FileListProps> = ({ files, onRemove }) => {
                 <p className="text-sm text-gray-500">
                   {file.type} • {file.size}
                 </p>
-                {file.progress < 100 && (
-                  <div className="w-full mt-2 bg-gray-200 rounded-full h-1.5">
-                    <div
-                      className="bg-blue-500 h-1.5 rounded-full transition-all duration-300"
-                      style={{ width: `${file.progress}%` }}
-                    />
-                  </div>
-                )}
               </div>
             </div>
             <button

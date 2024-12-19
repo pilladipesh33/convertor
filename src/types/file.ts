@@ -5,5 +5,4 @@ export type FileInfo = {
   name: string;
   type: FileType;
   size: string;
-  progress: number;
 };
