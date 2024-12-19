@@ -1,5 +1,5 @@
 export const EXTENSIONS = {
-  IMAGE: [
+  image: [
     "jpg",
     "jpeg",
     "png",
@@ -13,7 +13,7 @@ export const EXTENSIONS = {
     "raw",
     "tga",
   ],
-  VIDEO: [
+  video: [
     "mp4",
     "m4v",
     "mp4v",
@@ -31,23 +31,24 @@ export const EXTENSIONS = {
     "hevc",
     "265",
   ],
-  AUDIO: ["mp3", "wav", "ogg", "aac", "wma", "flac", "m4a"],
+  audio: ["mp3", "wav", "ogg", "aac", "wma", "flac", "m4a"],
 };
 
 export const ACCEPTED_FORMAT = {
   "image/*": [
-      ".jpg",
-      ".jpeg",
-      ".png",
-      ".gif",
-      ".bmp",
-      ".webp",
-      ".ico",
-      ".tif",
-      ".tiff",
-      ".raw",
-      ".tga",
-    ],
-    "audio/*": [],
-    "video/*": [],
-}
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".gif",
+    ".bmp",
+    ".webp",
+    ".ico",
+    ".tif",
+    ".tiff",
+    ".raw",
+    ".tga",
+  ],
+  "audio/*": [],
+  "video/*": [],
+};
+
