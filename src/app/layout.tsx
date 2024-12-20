@@ -35,6 +35,7 @@ export default function RootLayout({
 			<body
 				className={`${CursiveHeading.variable} ${tiny5.variable} ${spaceGrotesk.variable} antialiased`}
 			>
+				<div className="absolute top-0 z-[-2] h-screen w-screen bg-white bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]"></div>
 				<div className="p-5 min-h-dvh flex flex-col justify-center items-center">
 					<div className="sticky top-5">
 						<Header />
