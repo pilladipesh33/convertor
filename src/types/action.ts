@@ -1,5 +1,5 @@
 export type Actions = {
-	file: any;
+	file: File; // Changed from any to File for better type safety
 	file_name: string;
 	file_size: number;
 	from: string;
@@ -8,6 +8,6 @@ export type Actions = {
 	is_converting?: boolean;
 	is_converted?: boolean;
 	is_error?: boolean;
-	url?: any;
-	output?: any;
-};
+	url?: string;
+	output?: string; // Changed from any to unknown for better type safety
+}

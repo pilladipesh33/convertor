@@ -8,7 +8,6 @@ import {
 	UploadCloud,
 	FileSymlink,
 	X,
-	Check,
 	Download,
 	Loader2,
 	AlertCircle,
@@ -96,14 +95,20 @@ export const MediaZone = () => {
 
 		for (const action of updatedActions) {
 			try {
-				const { url, output } = await convertFile(ffmpegRef.current, action);
-				setActions((prevActions) =>
-					prevActions.map((a) =>
-						a === action
-							? { ...a, is_converted: true, is_converting: false, url, output }
-							: a
-					)
-				);
+				// const { url, output } = await convertFile(ffmpegRef.current, action);
+				if (ffmpegRef.current) {
+					const { url, output } = await convertFile(ffmpegRef.current, action);
+					setActions((prevActions) =>
+						prevActions.map((a) =>
+							a === action
+								? { ...a, is_converted: true, is_converting: false, url, output }
+								: a
+						)
+					);
+				  } else {
+					console.error("FFmpeg instance is not initialized");
+				  }
+				
 			} catch (err: unknown) {
 				console.log(err);
 				setActions((prevActions) =>
@@ -128,11 +133,11 @@ export const MediaZone = () => {
 	const download = (action: Actions) => {
 		const a = document.createElement("a");
 		a.style.display = "none";
-		a.href = action.url;
-		a.download = action.output;
+		a.href = action.url ?? "";
+		a.download = action.output ?? "";
 		document.body.appendChild(a);
 		a.click();
-		URL.revokeObjectURL(action.url);
+		URL.revokeObjectURL(action.url ?? "");
 		document.body.removeChild(a);
 	};
 
